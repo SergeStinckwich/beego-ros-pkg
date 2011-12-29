@@ -1,0 +1,15 @@
+<launch>
+<!--  <master auto="start"/>  
+  <param name="/use_sim_time" value="true"/>
+  <node pkg="stage" type="stageros" name="stage" args="$(find bosch_worlds)/maze.world" respawn="false" output="screen"/>
+  -->
+  <node pkg="tf" type="static_transform_publisher" name="fake_localize" args="0 0 0 0 0 0 map odom 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="fake_localize2" args="0 0 0 0 0 0 base_link map 10"/>
+  <node pkg="beego" type="beego" name="beego" />
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" />
+
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" args="0 0
+0 0 0 0 base_link laser 0" />
+  <include file="$(find explore_beego)/move.xml" />
+  <include file="$(find explore_beego)/explore.xml" />
+</launch>
